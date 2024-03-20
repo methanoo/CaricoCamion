@@ -1,5 +1,7 @@
 let carichi = [];
-
+meno=false;
+canc=false;
+ p=0;
 function aggiungiCarico() {
     const lunghezza = parseInt(document.getElementById('lunghezza').value);
     const larghezza = parseInt(document.getElementById('larghezza').value);
@@ -11,6 +13,7 @@ function aggiungiCarico() {
     carichi.push(carico);
 
     mostraCarichi();
+
 }
 
 function mostraCronologiaColli(index) {
@@ -35,15 +38,53 @@ function svuotacolli(index){
     cronologiaColliContainer.appendChild(li);
     });
 }
-
+function ordinaPerLunghezza() {
+   
+    carichi.sort((a, b) => {
+        if(a!=b){
+            return a.lunghezza - b.lunghezza;
+        }else{
+            carichi.sort((a, b) => a.priorita - b.priorita);
+            mostraCarichi();
+        }
+       
+    });
+    mostraCarichi(); 
+}
 function apriTastierino(index) {
     const carico = carichi[index];
-    carico.caricati=parseInt(document.getElementById('carico_input').value)+carico.caricati;
-    carico.colli.push(parseInt(document.getElementById('carico_input').value));
-    document.getElementById("carico_prova").reset();
-
-    mostraCarichi();
-}
+    
+    if (canc) {
+        confermaEliminazione(index); 
+        canc = false; 
+    }  
+        if (parseInt(document.getElementById('carico_input').value)!=parseInt(document.getElementById('carico_input').value)){
+        } 
+        if (meno) {
+            carico.caricati = -(parseInt(document.getElementById('carico_input').value)) + carico.caricati;
+            document.getElementById("carico_prova").reset();
+            meno = false;
+            mostraCarichi(parseInt(document.getElementById('carico_input').value));
+        }
+      if (parseInt(document.getElementById('carico_input').value)==parseInt(document.getElementById('carico_input').value)) {
+            carico.caricati = parseInt(document.getElementById('carico_input').value) + carico.caricati;
+            carico.colli.push(parseInt(document.getElementById('carico_input').value));
+            document.getElementById("carico_prova").reset();
+            meno = false;
+            mostraCarichi();
+        }
+      
+    }
+    
+  
+    function confermaEliminazione(index) {
+        if (confirm("Sei sicuro di voler cancellare questa riga?")) {
+            carichi.splice(index, 1); 
+            mostraCarichi(); 
+        }
+    }
+   
+  
 
 function calcolaParziale(carico) {
     if ((carico.quantita - carico.caricati) < 0) {
@@ -64,55 +105,82 @@ function aggiornaStileCarico(index) {
 
    if (parziale >= carico.quantita) {
         pulsanteCarica.style.backgroundColor = 'grey';
+     
+       
     }else {
+      
         pulsanteCarica.style.backgroundColor = 'red'; 
     }
     
 }
+function menoinputcambia(){
+  
+    meno = true;
+   }
+
 
 function mostraCarichi() {
     const carichiLista = document.getElementById('carichi-lista');
     carichiLista.innerHTML = '';
 
     carichi.forEach((carico, index) => {
+        
         const li = document.createElement('li');
         li.id = `carico-${index}`;
+    
         li.classList.add('carico');
-        li.innerHTML = `<u>Priorità: ${carico.priorita}</u> &nbsp; <b> ${carico.lunghezza} x ${carico.larghezza} </b> &nbsp; Quantità: <b>${carico.quantita}</b> &nbsp; Caricati: <b>${carico.caricati}</b>  &nbsp; Parziale: <b>${calcolaParziale(carico)}</b> &nbsp; Colli: <b>${carico.colli.length}</b>   &nbsp;Onda: ${carico.tipoOnda}&nbsp;&nbsp;&nbsp;&nbsp;`;
-        
-        const pulsanteCarica = document.createElement('button');
-        pulsanteCarica.textContent = 'Carica';
-        pulsanteCarica.onclick = () => apriTastierino(index);
-        li.appendChild(pulsanteCarica);
-
+    
+        li.innerHTML = ` <u> ${carico.priorita})</u> 
+        <b> ${carico.lunghezza} x ${carico.larghezza} </b>
+        Qt. <b>${carico.quantita}</b>
+        In: <b>${carico.caricati}</b> 
+        Rim: <b>${calcolaParziale(carico)}</b> 
+        Col: <b>${carico.colli.length}</b>
+        ${carico.tipoOnda} `;
+      
+         
         const linkCronologia = document.createElement('a');
         linkCronologia.href = '#';
         linkCronologia.className="linkcron"
         linkCronologia.textContent = 'Cron.';
         linkCronologia.onclick = () => mostraCronologiaColli(index);
         li.appendChild(linkCronologia);
-
+   
         carichiLista.appendChild(li);
+        const pulsanteCarica = document.createElement('button');
+        pulsanteCarica.textContent = ' ';
+        pulsanteCarica.className="caricatext";
+        pulsanteCarica.onclick = () => apriTastierino(index);
+   
+        li.appendChild(pulsanteCarica);
+        
+
+  
         aggiornaStileCarico(index);
 
         const parziale = calcolaParziale(carico);
         if (parziale <= 0) {
             pulsanteCarica.style.backgroundColor = 'green';
+            
         } 
         if (carico.caricati >= carico.quantita * 1.1) {
             pulsanteCarica.style.backgroundColor = 'purple';
+           
         } 
-
+     
     });
 }
 
 function ordinaPerPriorita() {
+   
     carichi.sort((a, b) => a.priorita - b.priorita);
     mostraCarichi();
 }
 
 function aggiornaCarichi() {
     mostraCarichi();
+   
 }
+
 
 setInterval(aggiornaCarichi, 1000);

@@ -38,8 +38,13 @@ top:20px;
   font-size: 20px;
   text-align: center;
 }
+.lunghezzaa{
+  position: relative;
+  margin: 10px 185px;
+  width: 200px;
+}
 .input-group input {
-  width: calc(100% - 130px);
+  width: 200px;
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -73,38 +78,53 @@ button:hover {
 }
 
 #carichi-lista {
+width: auto;
   list-style-type: none;
   padding: 0;
 }
 
 .carico {
-  margin-bottom: 20px;
-  padding: 15px;
-  border-radius: 4px;
+  position: absolute;
+
+  margin-bottom: 10px;
+  height: 20px;
+  width: 500px;
+  padding: 5px;
+  border-radius: 9px;
   background-color: #f2f2f2;
   position: relative;
 }
-
+.menoinput{
+  background-color: #b700ff;
+  width: auto;
+  text-align: center;
+  font-size: 22px;
+}
+.menoinput:hover{
+  background-color: #b700ff;
+}
 .carico button {
+  
   position: absolute;
-  top: 50%;
   right: 8px;
-  width: 80px;
+  width: 10px;
+  height: 10px;
+  top:50%;
   transform: translateY(-50%);
+  text-align: center;
   padding: 8px 12px;
 }
 
+
 .carico button:hover {
   background-color: #dcdcdc;
+
 }
 
  #menuToggle
  {
    display: block;
    position: relative;
-   top: 90px;
-   left: 130px;
-   
    z-index: 1;
    
    -webkit-user-select: none;
@@ -201,13 +221,21 @@ button:hover {
 
  #menu
  {
-   position: absolute;
-   width: 671px;
-   height: 695px;
-   margin: -180px 0 0 17%;
-   padding: 43px;
-   padding-top: 30px;
    
+
+   position: absolute;
+   left: -10%;
+   top: -700%;
+ 
+   width: 671px;
+   height: 800px;
+  
+   padding: 40px;
+   padding-top: 1px;
+   
+
+  background-color: #fff;
+  
    background: #ededed;
    list-style-type: none;
    -webkit-font-smoothing: antialiased;
