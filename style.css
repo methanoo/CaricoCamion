@@ -1,0 +1,247 @@
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f8f8f8;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 50px auto;
+  background-color: #fff;
+  padding: 50px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#input-section {
+  margin-bottom: 20px;
+}
+
+.input-group {
+  margin-bottom: 12px;
+  height:68px;
+
+}
+
+.input-group label {
+  display: inline-block;
+  font-size: 20px;
+  width: 120px;
+  font-weight: bold;
+}
+.refresh{
+  position: relative;
+  float: right; 
+right: 20px;
+top:20px;
+  font-size: 20px;
+  text-align: center;
+}
+.input-group input {
+  width: calc(100% - 130px);
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+#croncolli {
+  margin-top: 50px;
+  font-size:20px;
+}
+
+#colli-lista {
+  list-style-type: none;
+  padding: 0;
+}
+
+#colli-lista li {
+  margin-bottom: 5px;
+}
+button {
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  font-size: large;
+  border: none;
+  border-radius: 9px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+#carichi-lista {
+  list-style-type: none;
+  padding: 0;
+}
+
+.carico {
+  margin-bottom: 20px;
+  padding: 15px;
+  border-radius: 4px;
+  background-color: #f2f2f2;
+  position: relative;
+}
+
+.carico button {
+  position: absolute;
+  top: 50%;
+  right: 8px;
+  width: 80px;
+  transform: translateY(-50%);
+  padding: 8px 12px;
+}
+
+.carico button:hover {
+  background-color: #dcdcdc;
+}
+
+ #menuToggle
+ {
+   display: block;
+   position: relative;
+   top: 90px;
+   left: 130px;
+   
+   z-index: 1;
+   
+   -webkit-user-select: none;
+   user-select: none;
+ }
+ 
+ #menuToggle a
+ {
+   text-decoration: none;
+   color: #232323;
+   
+   transition: color 0.3s ease;
+ }
+ 
+ #menuToggle a:hover
+ {
+   color: tomato;
+ }
+ 
+ 
+ #menuToggle input
+ {
+   display: block;
+   width: 40px;
+   height: 33.5px;
+   position: absolute;
+
+   
+   cursor: pointer;
+   
+   opacity: 0; 
+   z-index: 2; 
+   
+   -webkit-touch-callout: none;
+ }
+ 
+ #menuToggle span
+ {
+   display: block;
+   width: 33px;
+   height: 4px;
+   margin-bottom: 5px;
+   position: relative;
+   
+   background: #cdcdcd;
+   border-radius: 3px;
+   
+   z-index: 1;
+   
+   transform-origin: 4px 0px;
+   
+   transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+               background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+               opacity 0.55s ease;
+ }
+ 
+ #menuToggle span:first-child
+ {
+   transform-origin: 0% 0%;
+ 
+ }
+
+ #menuToggle span:nth-last-child(2)
+ {
+   transform-origin: 0% 100%;
+ }
+ #menuToggle input:checked ~ span
+ {
+   opacity: 1;
+   transform: rotate(45deg) translate(-2px, -1px);
+   background: #232323;
+  
+ }
+ 
+ #menuToggle input:checked ~ span:nth-last-child(3)
+ {
+   opacity: 0;
+   transform: rotate(0deg) scale(0.2, 0.2);
+ }
+ 
+ #menuToggle input:checked ~ span:nth-last-child(2)
+ {
+   transform: rotate(-45deg) translate(0, -1px);
+  
+ }
+ input::-webkit-outer-spin-button,
+ input::-webkit-inner-spin-button {
+   -webkit-appearance: none;
+   margin: 0;
+ }
+ input[type=number] {
+  -moz-appearance: textfield;
+}
+
+ #menu
+ {
+   position: absolute;
+   width: 671px;
+   height: 695px;
+   margin: -180px 0 0 17%;
+   padding: 43px;
+   padding-top: 30px;
+   
+   background: #ededed;
+   list-style-type: none;
+   -webkit-font-smoothing: antialiased;
+   
+   transform-origin: 0% 0%;
+   transform: translate(-300%, 0);
+   
+   transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+ }
+ 
+ #menu input{
+  position: inherit;
+  width: 530px;
+  opacity: 100;
+  font-size: 20px;
+ }
+
+ #menu li
+ {
+   padding: 0px 0;
+   opacity: 100;
+   font-size: 420px;
+ }
+ 
+ #menuToggle input:checked ~ ul
+ {
+   transform: none;
+ }
+
+
+  a:link, a:visited, a:active {
+    text-decoration: underline;
+    color: #000000;
+    background-color: transparent;
+}
+
+ 
