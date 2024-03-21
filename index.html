@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Caricamento Cartoni</title>
-    <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css"> 
 </head>
 <body>
 
@@ -45,24 +45,25 @@
                                 </div>
                             </form>
                             <br>
-                            <button onclick="aggiungiCarico()">&nbsp;Aggiungi Carico&nbsp;</button>
-                            <button onclick="ordinaPerPriorita()">&nbsp;&nbsp;Ordina per Priorità&nbsp;&nbsp;</button>
-                            <button onclick="svuotaCarico()">&nbsp;Svuota Carico&nbsp;</button>
-                            <button class="lunghezzaa" onclick="ordinaPerLunghezza()">&nbsp;Ordina per Lunghezza&nbsp;</button>
+                            <button class="bottonimenu" onclick="aggiungiCarico();svuotaCarico()">&nbsp;Agg. al Carico&nbsp;</button>
+                            <button class="bottonimenu" onclick="ordinaPerPriorita()">&nbsp;&nbsp;Ordina per Prec.&nbsp;</button>
+                            <button class="lunghezzaa" onclick="ordinaPerLunghezza()">&nbsp;Ordina per Misura&nbsp;</button>
+                           
                         </div>
                     </div>
                 </ul>
             </div>
         </nav>
     
-        <button onClick="window.location.reload();" class="refresh"> ⟳ </button>
+        <button onclick="refresh()" class="refresh"> ⟳ </button>
         <div id="carichi">
-            <h2 style="font-size:30px;">Elenco Carichi:</h2>
+            <h2 style="font-size:30px;">Inserisci quantità:</h2>
             <form id="carico_prova">
                 <div class="input-group">
                     <input type="number" id="carico_input" style="font-size: 30px;">
                     <button class="menoinput" onclick="menoinputcambia()">Scarti</button>
-                    <button class="menoinput" onclick="canc=true; apriTastierino(index)">Canc</button>
+                    <button class="menoinput" onclick="cancellacavolodiriga()">Canc</button>
+                    <input type="number" id="carico_per" style="font-size: 30px;">
                 </div>
                 
             </form>
@@ -81,8 +82,7 @@
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script src="script.js"></script> 
 </body>
 </html>
-
 

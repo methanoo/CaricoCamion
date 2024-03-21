@@ -1,18 +1,21 @@
 let carichi = [];
 meno=false;
 canc=false;
- p=0;
 function aggiungiCarico() {
     const lunghezza = parseInt(document.getElementById('lunghezza').value);
     const larghezza = parseInt(document.getElementById('larghezza').value);
     const priorita = parseInt(document.getElementById('priorita').value);
     const tipoOnda = document.getElementById('tipo-onda').value;
     const quantita = parseInt(document.getElementById('quantita').value);
+    
+    if(lunghezza!=lunghezza||larghezza!=larghezza||priorita!=priorita||tipoOnda!=tipoOnda||quantita!=quantita){
+alert("ao completa")
+    }else{
+        const carico = { lunghezza, larghezza, priorita, tipoOnda, quantita, caricati: 0, colli: [] }; 
+        carichi.push(carico);
+        mostraCarichi();
+    }
 
-    const carico = { lunghezza, larghezza, priorita, tipoOnda, quantita, caricati: 0, colli: [] }; 
-    carichi.push(carico);
-
-    mostraCarichi();
 
 }
 
@@ -53,19 +56,35 @@ function ordinaPerLunghezza() {
 }
 function apriTastierino(index) {
     const carico = carichi[index];
-    
-    if (canc) {
+if(parseInt(document.getElementById('carico_per').value)==parseInt(document.getElementById('carico_per').value)){
+   for(p=0;p<parseInt(document.getElementById('carico_per').value);p++){
+    carico.caricati = parseInt(document.getElementById('carico_input').value) + carico.caricati;
+    carico.colli.push(parseInt(document.getElementById('carico_input').value));
+    meno = false;
+   }
+   mostraCarichi();
+   document.getElementById("carico_prova").reset();
+}else{
+    if (meno==true) {
+        if (confirm("Scarti, Confermi?")) {
+            carico.caricati = -(parseInt(document.getElementById('carico_input').value)) + carico.caricati;
+            carico.colli.push(-(parseInt(document.getElementById('carico_input').value)));
+            document.getElementById("carico_prova").reset();
+         
+            mostraCarichi();
+            meno = false;
+        }       
+
+        
+    }
+    if (canc==true) {
+        event.preventDefault();
         confermaEliminazione(index); 
         canc = false; 
     }  
         if (parseInt(document.getElementById('carico_input').value)!=parseInt(document.getElementById('carico_input').value)){
         } 
-        if (meno) {
-            carico.caricati = -(parseInt(document.getElementById('carico_input').value)) + carico.caricati;
-            document.getElementById("carico_prova").reset();
-            meno = false;
-            mostraCarichi(parseInt(document.getElementById('carico_input').value));
-        }
+       
       if (parseInt(document.getElementById('carico_input').value)==parseInt(document.getElementById('carico_input').value)) {
             carico.caricati = parseInt(document.getElementById('carico_input').value) + carico.caricati;
             carico.colli.push(parseInt(document.getElementById('carico_input').value));
@@ -73,18 +92,31 @@ function apriTastierino(index) {
             meno = false;
             mostraCarichi();
         }
-      
+        
+    }
     }
     
   
     function confermaEliminazione(index) {
+        event.preventDefault();
         if (confirm("Sei sicuro di voler cancellare questa riga?")) {
             carichi.splice(index, 1); 
             mostraCarichi(); 
         }
     }
    
-  
+  function cancellacavolodiriga(){
+    event.preventDefault();
+    canc=true;
+    apriTastierino(index);
+  }
+
+function refresh(){
+    
+if (confirm("Sei sicuro di voler cancellare tutto? (questa azione non è reversibile)")) {
+    window.location.reload();
+}
+}
 
 function calcolaParziale(carico) {
     if ((carico.quantita - carico.caricati) < 0) {
@@ -114,13 +146,14 @@ function aggiornaStileCarico(index) {
     
 }
 function menoinputcambia(){
-  
     meno = true;
+    event.preventDefault();
    }
 
 
 function mostraCarichi() {
     const carichiLista = document.getElementById('carichi-lista');
+    
     carichiLista.innerHTML = '';
 
     carichi.forEach((carico, index) => {
@@ -129,16 +162,30 @@ function mostraCarichi() {
         li.id = `carico-${index}`;
     
         li.classList.add('carico');
-    
-        li.innerHTML = ` <u> ${carico.priorita})</u> 
-        <b> ${carico.lunghezza} x ${carico.larghezza} </b>
-        Qt. <b>${carico.quantita}</b>
-        In: <b>${carico.caricati}</b> 
-        Rim: <b>${calcolaParziale(carico)}</b> 
-        Col: <b>${carico.colli.length}</b>
-        ${carico.tipoOnda} `;
-      
-         
+
+
+
+    li.innerHTML = ` <u> ${carico.priorita})</u> 
+    <b> ${carico.lunghezza} x ${carico.larghezza} </b>
+    Qt. <b>${carico.quantita}</b>
+    In: <b style="color:red;"><u>${carico.caricati}</u></b> 
+    Rim: <b>${calcolaParziale(carico)}</b> 
+    Col: <b>${carico.colli.length}</b>
+    ${carico.tipoOnda} `;
+
+    if(carico.caricati>=(carico.quantita)-5){
+li.innerHTML = ` <u> ${carico.priorita})</u> 
+<b> ${carico.lunghezza} x ${carico.larghezza} </b>
+Qt. <b>${carico.quantita}</b>
+In: <b style="color:green;"><u>${carico.caricati}</u></b> 
+Rim: <b>${calcolaParziale(carico)}</b> 
+Col: <b>${carico.colli.length}</b>
+${carico.tipoOnda} `
+    }
+
+  
+
+ 
         const linkCronologia = document.createElement('a');
         linkCronologia.href = '#';
         linkCronologia.className="linkcron"
@@ -151,7 +198,6 @@ function mostraCarichi() {
         pulsanteCarica.textContent = ' ';
         pulsanteCarica.className="caricatext";
         pulsanteCarica.onclick = () => apriTastierino(index);
-   
         li.appendChild(pulsanteCarica);
         
 
@@ -159,7 +205,7 @@ function mostraCarichi() {
         aggiornaStileCarico(index);
 
         const parziale = calcolaParziale(carico);
-        if (parziale <= 0) {
+        if (parziale <= 5) {
             pulsanteCarica.style.backgroundColor = 'green';
             
         } 
@@ -172,7 +218,6 @@ function mostraCarichi() {
 }
 
 function ordinaPerPriorita() {
-   
     carichi.sort((a, b) => a.priorita - b.priorita);
     mostraCarichi();
 }
@@ -181,6 +226,7 @@ function aggiornaCarichi() {
     mostraCarichi();
    
 }
+
 
 
 setInterval(aggiornaCarichi, 1000);
