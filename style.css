@@ -7,10 +7,10 @@ body {
 
 .container {
   max-width: 1200px;
-  margin: 50px auto;
+  margin: 90px auto;
   background-color: #fff;
-  padding: 50px;
-  border-radius: 8px;
+  padding: 20px 60px;
+  border-radius: 30px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
@@ -38,8 +38,9 @@ top:20px;
   font-size: 20px;
   text-align: center;
 }
+
 .input-group input {
-  width: calc(100% - 130px);
+  width: 200px;
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -73,38 +74,62 @@ button:hover {
 }
 
 #carichi-lista {
+width: auto;
   list-style-type: none;
   padding: 0;
 }
 
+.linkcron{
+  vertical-align: middle;
+}
+
 .carico {
-  margin-bottom: 20px;
-  padding: 15px;
-  border-radius: 4px;
+  position: absolute;
+  margin-bottom: 10px;
+  height: 30px;
+  width: 650px;
+  
+  padding: 5px;
+  border-radius: 9px;
   background-color: #f2f2f2;
   position: relative;
 }
-
+.menoinput{
+  background-color: #b700ff;
+  width: auto;
+  text-align: center;
+  font-size: 22px;
+}
+.menoinput:hover{
+  background-color: #b700ff;
+}
 .carico button {
+  
   position: absolute;
-  top: 50%;
-  right: 8px;
-  width: 80px;
+  right: 9px;
+  width: 10px;
+  height: 20px;
+  top:50%;
   transform: translateY(-50%);
+  text-align: center;
   padding: 8px 12px;
+
+}
+
+.caricatext{
+  position: absolute;
+  left: 6%;
 }
 
 .carico button:hover {
   background-color: #dcdcdc;
+
 }
 
  #menuToggle
  {
    display: block;
    position: relative;
-   top: 90px;
-   left: 130px;
-   
    z-index: 1;
    
    -webkit-user-select: none;
@@ -119,11 +144,6 @@ button:hover {
    transition: color 0.3s ease;
  }
  
- #menuToggle a:hover
- {
-   color: tomato;
- }
- 
  
  #menuToggle input
  {
@@ -131,8 +151,9 @@ button:hover {
    width: 40px;
    height: 33.5px;
    position: absolute;
-
-   
+   left:-40px;
+   top: -90px;
+  
    cursor: pointer;
    
    opacity: 0; 
@@ -148,7 +169,8 @@ button:hover {
    height: 4px;
    margin-bottom: 5px;
    position: relative;
-   
+   left:-30px;
+   top: -80px;
    background: #cdcdcd;
    border-radius: 3px;
    
@@ -188,26 +210,69 @@ button:hover {
  #menuToggle input:checked ~ span:nth-last-child(2)
  {
    transform: rotate(-45deg) translate(0, -1px);
-  
  }
+ 
  input::-webkit-outer-spin-button,
  input::-webkit-inner-spin-button {
    -webkit-appearance: none;
    margin: 0;
  }
+
  input[type=number] {
   -moz-appearance: textfield;
 }
 
+:root {
+  --darkgray: #ffffff;
+}
+
+select {
+  appearance: none;
+  outline: 10px red;
+  border: 1;
+  width: 5em;
+  font-size:20px;
+  height: 2em;
+  border-radius: 20px;
+  box-shadow: none;
+ 
+  flex: 1;
+  padding: 0 1em;
+  color: #000000;
+  background-color: var(--darkgray);
+  background-image: none;
+  cursor: pointer;
+}
+
+select::-ms-expand {
+  display: none;
+}
+
+.select {
+  position: relative;
+  display: flex;
+  width: 30em;
+  height: 30em;
+  border-radius: .25em;
+  overflow: hidden;
+}
+
+
  #menu
  {
    position: absolute;
+   left: -5%;
+   top: -925%;
+ 
    width: 671px;
-   height: 695px;
-   margin: -180px 0 0 17%;
-   padding: 43px;
-   padding-top: 30px;
+   height: 00px;
+  border-radius:100px;
+   padding: 40px;
+   padding-top: 1px;
    
+
+  background-color: #fff;
+  
    background: #ededed;
    list-style-type: none;
    -webkit-font-smoothing: antialiased;

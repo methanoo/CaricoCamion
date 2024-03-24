@@ -4,60 +4,78 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Caricamento Cartoni</title>
-    <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css"> 
 </head>
 <body>
 
-    <nav role="navigation">
-        <div id="menuToggle">
-            <input type="checkbox" />
-            <span></span>
-            <span></span>
-            <span></span>
-            <ul id="menu">
-                <div class="container">
-                    <div id="input-section">
-                        <h2 style= "text-align: center;">Inserisci i dettagli del carico:</h2>
-                        <form id="prova">
-                            <div class="input-group">
-                                <label for="tipo-onda">Tipo onda:</label>
-                                <input type="text" id="tipo-onda">
-                            </div>
-                            <div class="input-group">
-                                <label for="priorita">Priorità:</label>
-                                <input type="number" id="priorita">
-                            </div>
-                            <div class="input-group">
-                                <label for="lunghezza">Lunghezza:</label>
-                                <li><input type="number" id="lunghezza"></li>
-                            </div>
-                            <div class="input-group">
-                                <label for="larghezza">Larghezza:</label>
-                                <input type="number" id="larghezza">
-                            </div>
-                            <div class="input-group">
-                                <label for="quantita">Quantità:</label>
-                                <input type="number" id="quantita">
-                            </div>
-                        </form>
-                        <br>
-                        <button onclick="aggiungiCarico()">&nbsp;Aggiungi Carico&nbsp;</button>
-                        <button onclick="ordinaPerPriorita()">&nbsp;&nbsp;Ordina per Priorità&nbsp;&nbsp;</button>
-                        <button onclick="svuotaCarico()">&nbsp;Svuota Carico&nbsp;</button>
-                    </div>
-                </div>
-            </ul>
-        </div>
-    </nav>
-
+    
+    
+        
     <div class="container">
-        <button onClick="window.location.reload();" class="refresh"> ⟳ </button>
+        <nav role="navigation">
+            <div id="menuToggle">
+                <input type="checkbox" />
+                <span></span>
+                <span></span>
+                <span></span>
+                <ul id="menu">
+                    <div class="container">
+                        <div id="input-section">
+                            <h2 style= "text-align: center;">Inserisci i dettagli del carico:</h2>
+                            <form id="prova">
+                                <div class="input-group">
+                                     <label for="tipo-onda">Tipo onda:</label>
+                                     <br>
+                                    <select name="tipoonda" id="tipo-onda">
+                                        <option style="display:none" value="onda">Scegli</option>
+                                        <option value="A">A</option>
+                                        <option value="B">B</option>
+                                        <option value="T">T</option>
+                                        <option value="X">X</option>
+                                        <option value="M">M</option>
+                                    </select>
+                                   
+                                
+                                </div>
+                                <div class="input-group">
+                                    <label for="priorita">Priorità:</label>
+                                    <input type="number" id="priorita">
+                                </div>
+                                <div class="input-group">
+                                    <label for="lunghezza">Lunghezza:</label>
+                                    <li><input type="number" id="lunghezza"></li>
+                                </div>
+                                <div class="input-group">
+                                    <label for="larghezza">Larghezza:</label>
+                                    <input type="number" id="larghezza">
+                                </div>
+                                <div class="input-group">
+                                    <label for="quantita">Quantità:</label>
+                                    <input type="number" id="quantita">
+                                </div>
+                            </form>
+                            <br>
+                            <button class="bottonimenu" onclick="aggiungiCarico();svuotaCarico()">&nbsp;Agg. al Carico&nbsp;</button>
+                            <button class="bottonimenu" onclick="ordinaPerPriorita()">&nbsp;&nbsp;Ordina per Prec.&nbsp;</button>
+                            <button class="lunghezzaa" onclick="ordinaPerLunghezza()">&nbsp;Ordina per Misura&nbsp;</button>
+                           
+                        </div>
+                    </div>
+                </ul>
+            </div>
+        </nav>
+    
+        <button onclick="refresh()" class="refresh"> ⟳ </button>
         <div id="carichi">
-            <h2>Elenco Carichi:</h2>
+            <h2 style="font-size:30px;">Inserisci quantità:</h2>
             <form id="carico_prova">
                 <div class="input-group">
                     <input type="number" id="carico_input" style="font-size: 30px;">
+                    <button class="menoinput" onclick="menoinputcambia()">Scarti</button>
+                    <button class="menoinput" onclick="cancellacavolodiriga()">Canc</button>
+                    <input type="number" id="carico_per" style="font-size: 30px;">
                 </div>
+                
             </form>
             <ul id="carichi-lista"></ul>
            
@@ -74,6 +92,6 @@
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script src="script.js"></script> 
 </body>
 </html>
