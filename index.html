@@ -24,40 +24,32 @@
                             <h2 style= "text-align: center;">Inserisci i dettagli del carico:</h2>
                             <form id="prova">
                                 <div class="input-group">
-                                     <label for="tipo-onda">Tipo onda:</label>
-                                     <br>
-                                    <select name="tipoonda" id="tipo-onda">
-                                        <option style="display:none" value="onda">Scegli</option>
-                                        <option value="A">A</option>
-                                        <option value="B">B</option>
-                                        <option value="T">T</option>
-                                        <option value="X">X</option>
-                                        <option value="M">M</option>
-                                    </select>
-                                   
-                                
+                                    <label for="lunghezza">NomeCliente:</label>
+                                    <li><input type="text" id="lunghezza"></li>
                                 </div>
                                 <div class="input-group">
                                     <label for="priorita">Priorità:</label>
                                     <input type="number" id="priorita">
                                 </div>
                                 <div class="input-group">
-                                    <label for="lunghezza">Lunghezza:</label>
-                                    <li><input type="number" id="lunghezza"></li>
-                                </div>
-                                <div class="input-group">
-                                    <label for="larghezza">Larghezza:</label>
+                                    <label for="larghezza">Imballo:</label>
                                     <input type="number" id="larghezza">
                                 </div>
                                 <div class="input-group">
-                                    <label for="quantita">Quantità:</label>
+                                    <label for="quantita">QuantitàSpedire:</label>
                                     <input type="number" id="quantita">
+                                </div>
+                                <div class="input-group">
+                                    <label for="bancali">NumBancali:</label>
+                                    <input type="number" id="bancali">
                                 </div>
                             </form>
                             <br>
-                            <button class="bottonimenu" onclick="aggiungiCarico();svuotaCarico()">&nbsp;Agg. al Carico&nbsp;</button>
-                            <button class="bottonimenu" onclick="ordinaPerPriorita()">&nbsp;&nbsp;Ordina per Prec.&nbsp;</button>
-                            <button class="lunghezzaa" onclick="ordinaPerLunghezza()">&nbsp;Ordina per Misura&nbsp;</button>
+                            <button class="bottonimenu" onclick="aggiungiCarico();svuotaCarico()">&nbsp;Agg. al Carico&nbsp;&nbsp;</button>
+                            <button class="bottonimenu" onclick="creaReport()">&nbsp;&nbsp;&nbsp;&nbsp;Crea Report&nbsp;&nbsp;&nbsp;&nbsp;</button>
+                            <button class="bottonimenu" onclick="ordinaPerPriorita()">&nbsp;&nbsp;Ordina per Prec.&nbsp;&nbsp;</button>
+                            <br><br>
+                            <button class="bottonimenu" onclick="printReport()">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Stampa Report&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
                            
                         </div>
                     </div>
@@ -88,6 +80,7 @@
       
         <div id="croncolli">
             <h2>Cronologia Colli:</h2>
+    <b>Vettore:</b> &nbsp;&nbsp;&nbsp;<input type="text" style="font-size: 20px; width: 140px;">
             <ul id="colli-lista"></ul>
         </div>
     </div>
