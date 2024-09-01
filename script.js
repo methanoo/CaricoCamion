@@ -5,28 +5,24 @@ ao=false;
 counter=0;
 menobello=false;
 prior=false;
-larghezzaacolli=0;
-lunghezzaacolli=0;
+larghezzaacolli=new Array();
+nome=new Array();
 indice = new Array();
 
 
 function aggiungiCarico() {
-    const lunghezza = parseInt(document.getElementById('lunghezza').value);
+    const nome = document.getElementById('lunghezza').value;
     const larghezza = parseInt(document.getElementById('larghezza').value);
     const priorita = parseInt(document.getElementById('priorita').value);
-    const tipoOnda = document.getElementById('tipo-onda').value;
     const quantita = parseInt(document.getElementById('quantita').value);
-lunghezzaacolli= lunghezza;
-larghezzaacolli = larghezza;
+    const bancali = parseInt(document.getElementById('bancali').value);
 
-    if(lunghezza!=lunghezza||larghezza!=larghezza||tipoOnda=="onda"||quantita!=quantita){
-alert("ao completa")
-ao=true;
+    if(nome!=nome||larghezza!=larghezza||quantita!=quantita||bancali!=bancali){
     }else{
         if(priorita==99){
            prior=true;
         }
-        const carico = { lunghezza, larghezza, priorita, tipoOnda, quantita, caricati: 0, colli: [] }; 
+        const carico = { nome, larghezza, priorita, quantita, bancali, caricati: 0, colli: [] }; 
         carichi.push(carico);
         mostraCarichi();
     }
@@ -45,12 +41,12 @@ ao=false;
 
 function mostraCronologiaColli(index) {
     const cronologiaColliContainer = document.getElementById('colli-lista');
-    cronologiaColliContainer.innerHTML = `<b>Misura: ${lunghezzaacolli}x${larghezzaacolli}</b>`; 
+    cronologiaColliContainer.innerHTML = `<b>Cliente: ${nome[index]}</b>`; 
     const cronologiaColli = carichi[index].colli;
 
     cronologiaColli.forEach((quantitaCaricata, idx) => {
         const li = document.createElement('li');
-        li.textContent = `\n Carico ${idx + 1}: ${quantitaCaricata}`;
+        li.textContent = `\n Collo ${idx + 1}: ${quantitaCaricata}`;
         cronologiaColliContainer.appendChild(li);
     });
 }
@@ -64,19 +60,7 @@ function svuotacolli(index){
     cronologiaColliContainer.appendChild(li);
     });
 }
-function ordinaPerLunghezza() {
-   
-    carichi.sort((a, b) => {
-        if(a!=b){
-            return a.lunghezza - b.lunghezza;
-        }else{
-            carichi.sort((a, b) => a.priorita - b.priorita);
-            mostraCarichi();
-        }
-       
-    });
-    mostraCarichi(); 
-}
+
 function apriTastierino(index) {
     indice[index]=0;
     const carico = carichi[index];
@@ -192,7 +176,7 @@ function mostraCarichi() {
     carichiLista.innerHTML = '';
 
     carichi.forEach((carico, index) => {
-        
+ 
         const li = document.createElement('li');
         li.id = `carico-${index}`;
     
@@ -205,34 +189,68 @@ function mostraCarichi() {
 if(carico.priorita!=carico.priorita){
 carico.priorita=50;
 }
-    li.innerHTML = ` <span style = "vertical-align: middle;"><u> ${carico.priorita}</u>)  &nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
-    <b> ${carico.lunghezza} x ${carico.larghezza} </b>
+    li.innerHTML = ` <span style = "vertical-align: middle;"><u> ${carico.priorita}</u>)  &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
+    <b> ${carico.nome} </b>
+    &ensp; Imb: <b>${carico.larghezza}</b> 
     &nbsp; Qt. <b>${carico.quantita}</b>
     &nbsp; Caricati: <b style="color:red;"><u>${carico.caricati}</u></b> 
+    &ensp; NBanc: <b>${carico.colli.length+indice[index]}/${carico.bancali}</b> 
     &ensp; Rim: <b>${calcolaParziale(carico)}</b> 
-    &ensp;Colli: <b>${carico.colli.length+indice[index]}</b>
-    &ensp;Onda:${carico.tipoOnda} &ensp;</span>`;
+    &ensp;</span>`;
 
-    if(carico.caricati>=(carico.quantita)-5){
-        li.innerHTML = ` <span style = "vertical-align: middle;"><u> ${carico.priorita}</u>)  &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
-        <b> ${carico.lunghezza} x ${carico.larghezza} </b>
+    if(carico.priorita<10){
+        li.innerHTML = ` <span style = "vertical-align: middle;"><u> ${carico.priorita}</u>) &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
+        <b> ${carico.nome} </b>
+        &ensp; Imb: <b>${carico.larghezza}</b> 
+        &nbsp; Qt. <b>${carico.quantita}</b>
+        &nbsp; Caricati: <b style="color:red;"><u>${carico.caricati}</u></b> 
+        &ensp; NBanc: <b>${carico.colli.length+indice[index]}/${carico.bancali}</b> 
+        &ensp; Rim: <b>${calcolaParziale(carico)}</b> 
+        &ensp;</span>`;
+
+        if(carico.caricati>=(carico.quantita)-10){
+            li.innerHTML = ` <span style = "vertical-align: middle;"><u> ${carico.priorita}</u>)  &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
+            <b> ${carico.nome}</b>
+            &ensp; Imb: <b>${carico.larghezza}</b> 
+            &nbsp; Qt. <b>${carico.quantita}</b>
+            &nbsp; Caricati: <b style="color:green;"><u>${carico.caricati}</u></b> 
+            &ensp; NBanc: <b>${carico.colli.length+indice[index]}/${carico.bancali}</b> 
+            &ensp; Rim: <b>${calcolaParziale(carico)}</b> 
+            &ensp;</span>`;
+    } 
+    if(carico.caricati >= carico.quantita * 1.1){
+        li.innerHTML = ` <span style = "vertical-align: middle;"><u> ${carico.priorita}</u>)  &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp; 
+            <b> ${carico.nome}</b>
+            &ensp; Imb: <b>${carico.larghezza}</b> 
+            &nbsp; Qt. <b>${carico.quantita}</b>
+            &nbsp; Caricati: <b style="color:purple;"><u>${carico.caricati}</u></b> 
+            &ensp; NBanc: <b>${carico.colli.length+indice[index]}/${carico.bancali}</b> 
+            &ensp; Rim: <b>${calcolaParziale(carico)}</b> 
+            &ensp;</span>`;
+    }
+} 
+    if(carico.caricati>=(carico.quantita)-10){
+        li.innerHTML = ` <span style = "vertical-align: middle;"><u> ${carico.priorita}</u>) &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 
+        <b> ${carico.nome}</b>
+        &ensp; Imb: <b>${carico.larghezza}</b> 
         &nbsp; Qt. <b>${carico.quantita}</b>
         &nbsp; Caricati: <b style="color:green;"><u>${carico.caricati}</u></b> 
+        &ensp; NBanc: <b>${carico.colli.length+indice[index]}/${carico.bancali}</b> 
         &ensp; Rim: <b>${calcolaParziale(carico)}</b> 
-        &ensp;Colli: <b>${carico.colli.length+indice[index]}</b>
-        &ensp;Onda:${carico.tipoOnda} &ensp;</span>`;
+        &ensp;</span>`;
 } 
 if(carico.caricati >= carico.quantita * 1.1){
-    li.innerHTML = ` <span style = "vertical-align: middle;"><u> ${carico.priorita}</u>)  &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
-        <b> ${carico.lunghezza} x ${carico.larghezza} </b>
+    li.innerHTML = ` <span style = "vertical-align: middle;"><u> ${carico.priorita}</u>)  &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 
+        <b> ${carico.nome}</b>
+        &ensp; Imb: <b>${carico.larghezza}</b> 
         &nbsp; Qt. <b>${carico.quantita}</b>
         &nbsp; Caricati: <b style="color:purple;"><u>${carico.caricati}</u></b> 
+        &ensp; NBanc: <b>${carico.colli.length+indice[index]}/${carico.bancali}</b> 
         &ensp; Rim: <b>${calcolaParziale(carico)}</b> 
-        &ensp;Colli: <b>${carico.colli.length+indice[index]}</b>
-        &ensp;Onda:${carico.tipoOnda} &ensp;</span>`;
+        &ensp;</span>`;
 }
-
-
+bancali[index] = carico.bancali
+larghezzaacolli[index] = carico.larghezza;
 carichiLista.appendChild(li);
 const pulsanteCarica = document.createElement('button');
 pulsanteCarica.textContent = ' ';
@@ -246,11 +264,11 @@ li.appendChild(pulsanteCarica);
         linkCronologia.textContent = 'Cron.';
         linkCronologia.onclick = () => mostraCronologiaColli(index);
         li.appendChild(linkCronologia);
-   
+
         aggiornaStileCarico(index);
 
         const parziale = calcolaParziale(carico);
-        if (parziale <= 5) {
+        if (parziale <= 10) {
             pulsanteCarica.style.backgroundColor = 'green';
             
         } 
@@ -274,3 +292,84 @@ function aggiornaCarichi() {
 }
 
 setInterval(aggiornaCarichi, 1000);
+
+function svuotacolli(index){
+    const cronologiaColliContainer = document.getElementById('colli-lista');
+    cronologiaColliContainer.innerHTML = '';
+    const cronologiaColli = carichi[index].colli;
+    cronologiaColli.forEach((quantitaCaricata, idx) => {
+        const li = document.createElement('li');
+    li.textContent = ` `;
+    cronologiaColliContainer.appendChild(li);
+    });
+}
+
+function creaReport() {
+    const reportContainer = document.getElementById('colli-lista');
+    reportContainer.innerHTML = ''; 
+    carichi.forEach((carico, index) => {
+        const caricoRaggruppato = {};
+
+        carico.colli.forEach((quantitaCaricata) => {
+            if (caricoRaggruppato[quantitaCaricata]) {
+                caricoRaggruppato[quantitaCaricata]++;
+            } else {
+                caricoRaggruppato[quantitaCaricata] = 1;
+            }
+        });
+
+        const li = document.createElement('li');
+        li.innerHTML = `
+            <b>Cliente ${index + 1}: ${carico.nome}</b><br>
+            Imballo: ${carico.larghezza}<br>
+            Carico:
+        `;
+
+        const ul = document.createElement('ul');
+        for (const [caricoTipo, quantita] of Object.entries(caricoRaggruppato)) {
+            const subLi = document.createElement('li');
+            subLi.textContent = `${quantita} x ${caricoTipo}`;
+            ul.appendChild(subLi);
+        }
+
+        li.appendChild(ul);
+        reportContainer.appendChild(li);
+    });
+}
+
+function printReport() {
+    const originalContent = document.body.innerHTML;
+    const reportContent = document.getElementById('colli-lista').innerHTML;
+
+    document.body.innerHTML = `
+        <html>
+        <head>
+            <title>Stampa Report</title>
+            <style>
+                /* Stili per la stampa */
+                @media print {
+                    body {
+                        font-family: Arial, sans-serif;
+                    }
+                    .print-only {
+                        display: block;
+                    }
+                    .no-print {
+                        display: none;
+                    }
+                }
+            </style>
+        </head>
+        <body>
+            <h1>Report di Carico</h1>
+            ${reportContent}
+            <script>
+                window.print();
+                window.onafterprint = function() {
+                    window.location.reload();
+                };
+            </script>
+        </body>
+        </html>
+    `;
+}
